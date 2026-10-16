@@ -1,0 +1,268 @@
+﻿:root{
+   --main-color: #4D493E;
+   --bg-color: #C8C2AA;
+   --ele-color: rgba(77, 73, 62, 0.05);
+}
+
+body{
+   background-color: var(--bg-color);
+   background-size: 4px 4px;
+   background-image: linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,.07) 4px), linear-gradient(transparent, transparent 3px, rgba(0,0,0,.07) 4px);
+}
+
+.form-select, .form-control {
+   background-color: rgba(77, 73, 62, .15);
+   color: var(--main-color);
+   border: transparent; /*1px solid var(--main-color);*/
+   border-radius: 0;
+   cursor: pointer;
+   max-width: 330px;
+   font-size: large;
+}
+
+.search-main-bar {
+   width: 100%;
+   max-width: 1200px;
+}
+
+
+.form-select:focus, .form-control:focus {
+   background-color: rgba(77, 73, 62, .35);
+   border-color: transparent; /*var(--main-color)*/
+   color: var(--main-color);
+   box-shadow: none;
+}
+
+.form-select option{
+   background-color: var(--bg-color);
+   color: var(--main-color);
+}
+
+.form-control-sm {
+   font-size: 0.85rem; 
+}
+
+button, .custom-list .list-group-item, .form-control-button {
+   cursor: pointer;
+   font: inherit;
+   border: none;
+   padding: .4rem 1rem;
+   background-color: rgba(77, 73, 62, .15);
+   color: var(--main-color);
+   box-sizing: content-box;
+   position: relative;
+   border: 1px solid transparent;
+   border-left: none;
+   border-right: none;
+}
+
+button::before {
+   content: "";
+   position: absolute;
+   z-index: -1;
+   left: 0; top: 3px; bottom: 3px;
+   width: 0;
+   background-color: var(--main-color);
+   transition: width .2s;
+}
+
+button::after {
+   content: "";
+   display: none;
+   position: absolute;
+   background: var(--main-color);
+   width: 100%;
+   height: 2px;
+   left: 0;
+   bottom: -4px;
+}
+
+button:hover, button:focus, .custom-list .list-group-item:hover, .custom-list .list-group-item:focus, .form-control-button:focus{
+   background-color: transparent;
+   color: var(--bg-color);
+   border-color: var(--main-color);
+}
+   
+button:hover::before, button:focus::before {
+      width: 100%;
+}
+
+.btn-add{
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   width: 38px;
+   height: 38px;
+   background-color:transparent;
+   color: rgba(77, 73, 62, .60);
+   border: none;
+   border-radius: 4px;
+   font-size: 2.2rem;
+   font-weight: 300;
+   cursor: pointer;
+   padding: 0;
+   transition: all 0.2s ease;
+}
+
+.btn-add::before, .btn-add::after{
+   display: none !important;
+}
+
+.btn-add:hover, .btn-add:focus{
+   background-color: transparent;
+   color: var(--main-color);
+   outline: none;
+   transform: scale(1.15);
+}
+
+.custom-list {
+   max-height: 270px;
+   overflow-y: auto;
+   overflow-x: hidden;
+   scrollbar-width: thin; 
+   scrollbar-color: var(--main-color) rgba(77, 73, 62, 0.15);
+
+}
+
+.custom-list .list-group-item.active{
+   background-color: var(--main-color);
+   color: var(--bg-color);
+   border-color: transparent;
+   font-weight:bold;
+}
+
+
+
+/* ========================================== */
+/*                 SCROLLBAR                  */
+/* ========================================== */
+
+.custom-list::-webkit-scrollbar, .form-control::-webkit-scrollbar {
+   width: 8px;
+}
+
+.custom-list::-webkit-scrollbar-track, .form-control::-webkit-scrollbar-track {
+   background: rgba(77, 73, 62, 0.15);
+   border-left: 1px solid var(--bg-color);
+}
+
+.custom-list::-webkit-scrollbar-thumb, .form-control::-webkit-scrollbar-thumb {
+   background-color: var(--main-color);
+   border-radius: 0;
+}
+
+
+
+/* ========================================== */
+/*        OFFCANVAS (ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ)          */
+/* ========================================== */
+
+/* Το φόντο και το περίγραμμα του μενού */
+.custom-offcanvas {
+   background-color: var(--main-color); 
+   color: #C8C2AA !important;
+   border-left: 2px solid #8c887d !important; 
+}
+
+/* Γραμμή κάτω από τον τίτλο */
+.custom-offcanvas .offcanvas-header {
+   border-bottom: 1px dashed #C8C2AA;
+}
+
+.custom-offcanvas .form-control{
+   background-color: rgba(200, 194, 170, 0.15) !important;
+   color: var(--bg-color) !important;
+   border: 1px solid var(--bg-color) !important;
+   border-radius: 0 !important;
+}
+
+.custom-offcanvas .form-control:focus{
+   background-color: rgba(200, 194, 170, 0.05) !important;
+}
+
+.custom-offcanvas .newBtn{
+   position: relative;
+   overflow: hidden;
+   background-color: rgba(200, 194, 170, 0.15);
+   border: 1px solid var(--bg-color);
+   color: var(--bg-color);
+}
+
+.custom-offcanvas .newBtn::before{
+   content:"";
+   position:absolute;
+   top:0;
+   bottom:0;
+   width:0;
+   height:100%;
+   background-color: rgba(0,0,0, 0.55);
+   transition: width .2s;
+}
+
+.custom-offcanvas .newBtn:hover::before{
+   width: 100%;
+}
+
+.custom-offcanvas .form-control::placeholder{
+   color: var(--bg-color) !important;
+}
+
+.custon-offcanvas .form-control:focus{
+   background-color: #e3dec9 !important;
+   border-color: #d1b464 !important;
+   box-shadow: none !important;
+}
+
+
+
+
+/* ========================================== */
+/* CUSTOM CHECKBOX (Αυστηρά τετράγωνο)        */
+/* ========================================== */
+.custom-checkbox {
+  border-radius: 0 !important; /* Τέλος οι καμπύλες */
+   border: 1px solid var(--bg-color);
+   background-color: transparent;
+   width: 20px;
+   height: 20px;
+   cursor: pointer;
+}
+
+.custom-checkbox:checked {
+   background-color: var(--main-color);
+   border-color: var(--bg-color);
+}
+
+/* Αφαίρεση του μπλε περιγράμματος του Bootstrap στο κλικ */
+.custom-checkbox:focus {
+   box-shadow: none;
+   border-color: var(--bg-color);
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Για συμβατότητα με Firefox */
+}
+
+
+
+#signalsList .list-group-item:hover,
+#signalsList .list-group-item:hover span{
+   color:var(--main-color) !important;
+   background-color: transparent !important;
+}
+
+#partsList .btn-add:hover{
+   color:var(--bg-color) !important;
+}
+
+.list-group-item:hover .btn-add{
+   color:var(--bg-color) !important;
+}
+
+

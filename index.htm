@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="styles.css">   
+   <title>Test Site</title>
+</head>
+
+<body>
+   <div class="w-100 d-flex align-items-center px-4" style="background-color: var(--main-color); height:48px; border-bottom:2px solid #8c887d;">
+   </div>
+   <div class="container mt-5">
+      <div class="row">
+
+         <!-- ========================================== -->
+         <!-- ΚΟΥΜΠΙ & ΠΑΝΕΛ ΑΝΑΖΗΤΗΣΗΣ (COLLAPSE)       -->
+         <!-- ========================================== -->
+         <div class="mb-4">
+            <div>
+               <!-- Το Κουμπί που ανοιγοκλείνει το Πάνελ -->
+               <button class="form-control-button text-start fw-bold w-25" type="button" data-bs-toggle="collapse" data-bs-target="#searchPanel" style="cursor: pointer;">
+                  ▼ Advanced Search with Filters
+               </button>
+               <button type="button" id="searchBtn" class="btn-add" data-bs-toggle="offcanvas" data-bs-target="#newDetails">+</button>
+            </div>
+
+            <!-- Το Κρυφό Πάνελ -->
+            <div class="collapse mt-2" id="searchPanel">
+               <div class="p-3" style="border: 1px dashed var(--main-color); background-color: rgba(77, 73, 62, 0.05);">
+                  
+                  <!-- ========================================== -->
+                  <!-- ΓΡΑΜΜΗ 1: Μεγάλη Μπάρα & Κουμπί Αναζήτησης -->
+                  <!-- ========================================== -->
+                  <div class="d-flex gap-2 mb-3">
+                        <!-- Το w-100 αναγκάζει την μπάρα να πιάσει όλο τον διαθέσιμο χώρο -->
+                        <input type="text" id="bruce" class="form-control search-main-bar" placeholder="Contract Number or Material Name...">
+                        
+                        <!-- Το νέο τετράγωνο κουμπί αναζήτησης -->
+                        <button type="button" class="btn-search-square" title="Αναζήτηση">Search</button>
+                  </div>
+
+                  <!-- ========================================== -->
+                  <!-- ΓΡΑΜΜΗ 2: Τρεις μικρότερες (λεπτές) μπάρες -->
+                  <!-- ========================================== -->
+                  <div class="d-flex gap-3">
+                     <input type="text" id="robin" class="form-control form-control-sm" placeholder="NSN...">
+                     <input type="text" id="nightwing" class="form-control form-control-sm" placeholder="Part Number...">
+                     <input type="text" id="redhood" class="form-control form-control-sm" placeholder="Serial Number...">
+                  </div>
+                  
+               </div>
+            </div>
+         </div>
+
+				<div class="mb-4">
+        	<div class="col-md-4">
+          	<form>
+
+            	<div class="mb-3">
+                <h5 class="mb-3" style="color: var(--main-color);">Contract Info</h5>
+
+                <div class="d-flex gap-2">
+                   <select id="contracts" name="contracts" class="form-select">
+                      <option>---Choose a Contract---</option>
+                   </select>
+                   <button type="button" class="btn-add" id="rmvContrBtn">-</button>
+                </div>
+             </div>
+
+            <div class="mb-3">
+            	<input type="text" id="materialName" name="materialName" class="form-control" placeholder="---Material Name---">
+            </div>            
+
+        		</form>
+        	</div>
+				</div>
+
+				<div class="col-md-4">
+					<h5 class="mb-3" style="color: var(--main-color);">NSN List</h5>
+					<div class="list-group rounded-0 custom-list" id="nsnList">
+					</div>
+				</div>
+   
+         <div class="col-md-4">
+            <h5 class="mb-3" style="color: var(--main-color);">Part Number List</h5>
+            <div class="list-group rounded-0 custom-list" id="partsList">
+            </div>
+         </div>
+
+         <div class="col-md-4">
+            <h5 class="mb-3" style="color: var(--main-color);">Serial Number List</h5>
+            <div class="list-group rounded-0 custom-list" id="serialsList">
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+<!-- ========================================== -->
+<!--               ΜΕΝΟΥ MORE INFO              -->
+<!-- ========================================== -->
+   <div class="container mt-5">         
+      <div class="mb-4">
+         <button class="more-info-btn text-start fw-bold w-25" type="button" data-bs-toggle="collapse" data-bs-target="#infoPanel" style="cursor: pointer; ">
+            ▼ More Info
+         </button>
+      </div>
+      <div class="collapse mt-2" id="infoPanel">
+         <div class="p-3" style="border: 1px dashed var(--main-color); background-color: rgba(77, 73, 62, 0.05);">
+             <div class="mb-2">
+                <label class="form-label fw-bold">Σήματα / Έγγραφα Προέλευσης:</label> 
+ 
+                <!-- 1. Πεδίο Πληκτρολόγησης & Κουμπί Προσθήκης -->
+                <div class="d-flex gap-2 mb-3">
+                   <input type="text" class="form-control" id="newSignal" placeholder="xxxxxxΖ Ιουλ 26/ΔΑΝ">
+                   <button type="button" class="btn-add" id="addSigBtn" title="Προσθήκη Σήματος">+</button>
+                </div>
+
+                <!-- 2. Μίνι Λίστα (Εμφανίζει τα σήματα που έχουν προστεθεί) -->
+                <div class="list-group rounded-0 custom-list" id="signalsList" style="max-height: 150px;">  
+                </div>
+             </div> 
+          </div>
+       </div>
+    </div>
+
+
+
+<!-- ========================================================= -->
+<!-- ΚΡΥΦΟ ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ (OFFCANVAS) ΓΙΑ ΠΡΟΣΘΗΚΗ ΠΛΗΡΟΦΟΡΙΑΣ -->
+<!-- ========================================================= -->
+<div class="offcanvas offcanvas-end custom-offcanvas" tabindex="-1" id="newDetails">
+   <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold">Νεες Πληροφορίες</h5>
+      <button type="button" class="btn-add shadow-none" data-bs-dismiss="offcanvas" style="color: var(--bg-color);">x</button>
+   </div>
+
+   <div class="offcanvas-body">
+      <form>
+         <label for="newContrNum">Add Contract Number.</label><br>
+         <div class="mb-3">
+            <input type="text" id="newContrNum" class="form-control" rows="5" placeholder="---New Contract Number---">        
+	 </div>
+         <div class="mb-3">
+            <button type="button" class="newBtn" id="newContrBtn">Add</button>
+         </div>
+
+         <label for="newNSN">Add NSN.</label><br>
+         <div class="mb-3">
+            <textarea id="newNsn" class="form-control" rows="4" placeholder="---New NSN---"></textarea>
+         </div>
+         <div class="mb-3">
+            <button type="button" class="newBtn" id="newNsnBtn">Add</button>
+         </div>
+
+         <label for="newPartNum">Add Part Number.</label><br>
+         <div class="mb-3">
+            <textarea id="newPartNum" class="form-control" rows="4" placeholder="---New Part Number---"></textarea>
+         </div>  
+         <div class="mb-3">
+            <button type="button" class="newBtn" id="newPartBtn">Add</button>
+         </div>
+
+         <label for="newSerNum">Add Serial Number.</label><br>
+         <div class="mb-3">
+            <textarea id="newSerNum" class="form-control" rows="4" placeholder="---New Serial Number---"></textarea>
+         </div>
+         <div class="mb-3">
+            <button type="button" class="newBtn" id="newSerialBtn">Add</button>
+         </div>
+
+      </form>
+   </div>       
+</div>
+
+
+<!-- ========================================== -->
+<!-- ΚΡΥΦΟ ΠΛΕΥΡΙΚΟ ΜΕΝΟΥ (OFFCANVAS) ΓΙΑ S/N   -->
+<!-- ========================================== -->
+<div class="offcanvas offcanvas-end custom-offcanvas" tabindex="-1" id="snDetailsPanel">
+
+   <!-- Επικεφαλίδα του Μενού -->
+   <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold">Λεπτομέρειες S/N</h5>
+      <button type="button" style="color: var(--bg-color);" class="btn-add shadow-none" data-bs-dismiss="offcanvas">x</button>
+   </div>
+
+   <!-- Το Σώμα με τη Φόρμα -->
+   <div class="offcanvas-body">
+      <form>
+      
+      <!-- S/N που επεξεργαζόμαστε (Readonly για υπενθύμιση) -->
+      <div class="mb-4">
+         <label class="form-label" style="font-size: 0.9rem; opacity: 0.8;">Επιλεγμένο Serial Number:</label>
+         <input type="text" id="selectedInput" class="form-control text-center fw-bold" readonly>
+      </div>
+
+      <!-- Ημερομηνία 1 -->
+      <div class="mb-3">
+         <label for="dateIn" class="form-label">Ημερομηνία Παραλαβής:</label>
+         <!-- Το type="date" βγάζει αυτόματα το ημερολόγιο του browser -->
+         <input type="date" id="dateIn" class="form-control">
+      </div>
+
+      <!-- Ημερομηνία 2 -->
+      <div class="mb-4">
+         <label for="dateOut" class="form-label">Ημερομηνία Ολοκλήρωσης:</label>
+         <input type="date" id="dateOut" class="form-control">
+      </div>
+
+      <!-- Εργατοώρες -->
+      <div class="mb-4">
+         <label for="workHours" class="form-label">Εργατοώρες (Man-hours):</label>
+         <!-- Το type="number" επιτρέπει μόνο αριθμούς. Το step="0.5" επιτρέπει μισές ώρες -->
+         <input type="number" id="workHours" class="form-control" min="0" step="0.5" placeholder="π.χ. 4.5">
+      </div>
+
+      <!-- Checkbox Τιμολόγησης -->
+      <div class="form-check mb-5 d-flex align-items-center gap-2">
+         <input class="form-check-input custom-checkbox" type="checkbox" id="invoicedCheck">
+         <label class="form-check-label mt-1" for="invoicedCheck">
+            Ολοκληρώθηκε / Τιμολογήθηκε
+         </label>
+      </div>
+
+      <!-- Έγγραφο Τιμολόγησης -->
+      <div class="mb-4">
+         <label for="invoiceDocName" class="form-label">Όνομα Εγγράφου Τιμολόγησης:</label>
+         <input type="text" id="invoiceDocName" class="form-control">
+      </div>
+
+      <!-- Κουμπί Αποθήκευσης αυτού του S/N -->
+      <!-- Χρησιμοποιούμε την class που φτιάξαμε πριν για το μεγάλο κουμπί αναζήτησης! -->
+      <button type="button" class="newBtn fw-bold" style="padding: 0.75rem;">Αποθήκευση Δεδομένων</button>
+
+      </form>
+   </div>
+</div>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="script.js"></script>
+</body>
+
+</html>
