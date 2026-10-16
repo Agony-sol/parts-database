@@ -46,7 +46,7 @@
 
 1. **Κλωνοποίηση του αποθετηρίου:**
    ```bash
-   git clone [https://github.com/](https://github.com/)Agony-sol/parts-database.git
+   git clone https://github.com/Agony-sol/parts-database.git
    cd parts-database
    ```
 
